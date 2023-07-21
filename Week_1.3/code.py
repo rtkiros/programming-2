@@ -1,3 +1,4 @@
+# Just 'code.py` is not a very good filename, right? A bit too general`
 
 import csv
 import json
@@ -54,9 +55,12 @@ class Reader:
         """
         self.csv_file = csv_file
         self.stride = stride
+        # why do you need the header line in this class? I would argue that keeping 
+        # track of the headers of a csv is the responsibility of whoever it parsing
+        # that file. You also never actually read this value in this class.
         self.header_line = linecache.getline(self.csv_file, 1).strip('\n').split(',')
         self.current_line = 2  # Start from line 2 (excluding the header line)
-        self.observers = set()
+        self.observers = set() # good to make this a set
 
     def add_observer(self, observer):
         """
@@ -105,14 +109,22 @@ class Reader:
 
             # Notify observers with the new data
             self.notify_observers(parsed_data)
+            # Who are you returning to? The general idea of the observer pattern is 
+            # that the internal state of the observable is completely internal to the 
+            # instances, and is only propegated via the observers. Also, I'm not sure
+            # you actually catch this return value somewhere in your code.
             return parsed_data
         else:
+            # Good to have at least the same return type in all cases.
             return []
 
     def run(self):
         """
         Starts the Reader and continuously reads lines from the CSV file.
         """
+        # You're basically hanging the main thread here.
+        # The responsibility of keeping the thread running and only calling get_lines of this 
+        # class should be outside the observable.
         while True:
             json_data = self.get_lines()
             if json_data == '':

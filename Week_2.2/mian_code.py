@@ -1,3 +1,4 @@
+# Why is this file called `mian_code.py`? 🤔
 from Bio import Entrez
 import ssl
 import multiprocessing as mp
@@ -36,13 +37,18 @@ def fetch_article_information(email, api_key, article_id):
     print(handle.read())
 
 # Setting up private information
+
+# You should not have your email and api key in your repo;
+# it should be in a config file.
+
 email = 'r.t.kiros@st.hanze.nl'
 api_key = '0201e348f8ceaf789e59357c27cc61fdb109'
 article_id = '30049270'
 
 fetch_article_information(email, api_key, article_id)
 
-
+# It looks as though you have come code duplication. Couldn't you abstract 
+# away the common code for both experiments?
 def download_article(pubmed_id, downloading_mode="p"):
     """
     Downloads the article with the given PubMed ID.
@@ -92,7 +98,7 @@ def get_references(amount, pubmed_id):
 
 
 def print_duration_time(start_time, end_time, execution_desc):
-     """
+    """
     Prints the duration of an execution step.
 
     Args:
@@ -104,7 +110,7 @@ def print_duration_time(start_time, end_time, execution_desc):
 
 
 def download_parallel(pubmed_id, amount):
-     """
+    """ #where do all these wrong indentations in the first line come from?
     Downloads articles in parallel using multiprocessing.
 
     Args:
@@ -149,6 +155,6 @@ def download_sequential(pubmed_id, amount):
 if __name__ == '__main__':
     # Call download functions
     pubmed_id = '29635200'  
-    amount = 10  
+    amount = 10  # a bit overkill here, right?
     download_parallel(pubmed_id, amount)
     download_sequential(pubmed_id, amount)

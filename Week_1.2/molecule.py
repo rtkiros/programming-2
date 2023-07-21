@@ -23,6 +23,8 @@ class Molecule:
         Returns:
             Dict[str, int]: The dictionary with atom symbols as keys and their counts as values.
         """
+        # could be a oneliner, but why do you need this method? You're only using it 
+        # in `__str__` but why not just iterate over `self.atom_pairs` in that method?
         atom_counts = {}
         for atom, count in self.atom_pairs:
             atom_counts[atom.symbol] = atom_counts.get(atom.symbol, 0) + count
