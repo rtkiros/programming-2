@@ -1,9 +1,14 @@
+# Do you think it is a good idea to put all the code in one file,
+# in this particula case? You are working with a client and a server
+# so it's probable that they will run on / be distributed on different
+# machines...
+
 import pandas as pd
 import http.server
 import socketserver
 
 class WeatherDataHandler(http.server.SimpleHTTPRequestHandler):
-     """
+    """
     A custom HTTP request handler for weather data.
 
     Args:
@@ -26,6 +31,7 @@ class WeatherDataHandler(http.server.SimpleHTTPRequestHandler):
             self.end_headers()
 
     def handle_data_request(self):
+        # Good. Nice small and good readable method.
         """
         Handles data-specific HTTP requests.
         """
@@ -59,7 +65,7 @@ class WeatherDataHandler(http.server.SimpleHTTPRequestHandler):
 
 
 class DataProvider:
-     """
+    """
     A class for providing weather data.
 
     Args:
@@ -89,6 +95,8 @@ class DataProvider:
         else:
             raise ValueError("Invalid parameter")
 
+    # Good to have these small methods to return different data-sets. That makes 
+    # your main code more manageble.
     def get_data_yearly(self, year):
         """
         Retrieves weather data for a specific year.
@@ -126,3 +134,4 @@ if __name__ == "__main__":
     print("serving at port", PORT)
     http.serve_forever()
 
+# Where's your client?

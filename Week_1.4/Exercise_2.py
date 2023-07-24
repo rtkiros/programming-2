@@ -12,7 +12,7 @@ def apply_functions(data, *functions):
     """
 
     result = []
-    
+    # Could (should) be in one list comprehension
     for func in functions:
         result.append([func(value) for value in data])
     return result

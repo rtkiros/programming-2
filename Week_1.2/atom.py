@@ -18,6 +18,10 @@ class Atom:
         self.num_neutrons = num_neutrons
 
     def proton_number(self) -> int:
+        # I know that PEP requires you to document all the methods, but personally 
+        # (and more important persons than me) dislike methods whose docstring is longer
+        # than the method itself, especially if the method is clear in itself (like 
+        # and setters).
         """
         Returns the atomic number of the atom.
         """
@@ -65,10 +69,11 @@ class Atom:
             bool: True if the atom is less than the other atom, False otherwise.
         """
 
+        #  this is incorrect: the method never returns a True of False
         if isinstance(other, Atom):
             if self.symbol != other.symbol:
                 raise ValueError("Cannot compare isotopes of different elements.")
-                return self.mass_number() < other.mass_number()
+                return self.mass_number() < other.mass_number() # this line is never called
             else:
                 raise ValueError("Cannot compare Atom with a different type.")
 
@@ -87,6 +92,11 @@ class Atom:
         Returns:
             bool: True if the atom is greater than the other atom, False otherwise.
         """
+
+        # This is incorrect: you're comparing two objects (presumably), so the
+        # `==` is indetermined (or it will return True only if the two objecs are
+        # actually the same object); it also does not comply with your comments 
+        # in your docstring: you're not using the mass number at all.
         return self == other or self < other
 
     def __le__(self, other) -> bool:
@@ -99,6 +109,7 @@ class Atom:
         Returns:
             bool: True if the atom is less than or equal to the other atom, False otherwise.
         """
+        #  this is incorrect: the method never returns a True of False
         if isinstance(other, Atom):
             if self.symbol != other.symbol:
                 raise ValueError("Cannot compare isotopes of different elements.")
@@ -116,4 +127,5 @@ class Atom:
         Returns:
             bool: True if the atom is greater than or equal to the other atom, False otherwise.
         """
+        # See my comment above.
         return self == other or self > other

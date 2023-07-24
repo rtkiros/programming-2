@@ -31,6 +31,7 @@ class Chloroplast:
             ValueError: If the molecule is not water or carbon dioxide.
         """
 
+        # better to uppercase this, just to be sure.
         if str(molecule) == 'H2O':
             self.water += 1
         elif str(molecule) == 'CO2':
@@ -48,6 +49,10 @@ class Chloroplast:
 
             sugar_m = Molecule([(carbon, 6), (hydrogen, 12), (oxygen, 6)])
             oxygen_m = Molecule([(oxygen, 2)])
+
+            # This is incorrect.
+            # You should have returned new sugar and oxygen molecules. In this case you
+            # just return a list of tuples of strings and numbers.
             return [(str(sugar_m), 1), (str(oxygen_m), 6)]
         return []
    
